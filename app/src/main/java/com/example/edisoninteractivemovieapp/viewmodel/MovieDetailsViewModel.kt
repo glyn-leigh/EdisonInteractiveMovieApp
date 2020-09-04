@@ -28,7 +28,7 @@ class MovieDetailsViewModel:ViewModel(){
                         it.body()?.let { genre ->
                             genreLiveData.value = if(!genre.genres.isNullOrEmpty()) genre.genres else mutableListOf()
                         }
-                    }?: {genreLiveData.value  = mutableListOf()}
+                    }?: setEmptyList()
                 }
 
                 override fun onFailure(call: Call<Genre>, t: Throwable) {
@@ -37,5 +37,8 @@ class MovieDetailsViewModel:ViewModel(){
             })
 
         return genreLiveData
+    }
+    private fun setEmptyList(){
+        genreLiveData.value  = mutableListOf()
     }
 }

@@ -29,7 +29,7 @@ class MovieViewModel: ViewModel() {
                         it.body()?.let { popularMovies ->
                             movieLiveData.value = if(!popularMovies.results.isNullOrEmpty()) popularMovies.results else mutableListOf()
                         }
-                    }?: {movieLiveData.value  = mutableListOf()}
+                    }?: setEmptyList()
                 }
 
                 override fun onFailure(call: Call<PopularMovieResponse>, t: Throwable) {
@@ -38,6 +38,10 @@ class MovieViewModel: ViewModel() {
             })
 
         return movieLiveData
+    }
+
+    private fun setEmptyList(){
+        movieLiveData.value  = mutableListOf()
     }
 
 
